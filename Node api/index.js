@@ -34,7 +34,14 @@ app.post('/postblog',(req,res)=>{
     })
 })
 
+app.delete('/deleteblog/:id',(req,res)=>{
+    var id=mongo.ObjectId(req.params.id);
+    db.collection('blogdata').deleteOne({_id:id},(err,succ)=>{
+        if (err) throw err
+        res.status(200).send(succ)
+    })    
 
+})
 
 Mongoclient.connect(url,(err,connectio)=>{
     if(err) throw err
