@@ -1,0 +1,10 @@
+.update{
+    height: 300px;
+    position:absolute;
+    background-color:lightsteelblue;
+    margin-left: 500px;
+    width: 500px;
+    border-radius: 10px;
+    border: 2px 2px 2px;
+    border-color: black;
+}

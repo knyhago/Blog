@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}))
 
 
-const url="mongodb+srv://knyhago:kenny@cluster0.2kzve.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+const url="mongodb+srv://knyhago:kenny@cluster0.2kzve.mongodb.net/?retryWrites=true&w=majority"||process.env.MONGODB_URL;
 
 
 
@@ -39,9 +39,21 @@ app.delete('/deleteblog/:id',(req,res)=>{
     db.collection('blogdata').deleteOne({_id:id},(err,succ)=>{
         if (err) throw err
         res.status(200).send(succ)
-    })    
+    })
+})   
 
-})
+ app.put('/update/:id',(req,res)=>{
+    var id=mongo.ObjectId(req.params.id);
+    db.collection("blogdata").updateOne({_id:id},{
+        $set:{desc:req.body}
+    },(err,suc)=>{
+        if (err) throw err
+        res.send(suc)
+    })
+ })
+   
+    
+      
 
 Mongoclient.connect(url,(err,connectio)=>{
     if(err) throw err
